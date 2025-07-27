@@ -33,3 +33,14 @@ Now write a helpful email reply and suggest a subject."""
     
     result = model.generate_content(prompt)
     return Response({"reply": result.text})
+
+from django.http import JsonResponse
+
+def support_test(request):
+    if request.method == "GET":
+        return JsonResponse({
+            "message": "All jobs successfully recreated.",
+            "recreated_jobs": []
+        }, status=200)
+    else:
+        return JsonResponse({"error": "Only GET method allowed."}, status=405)
